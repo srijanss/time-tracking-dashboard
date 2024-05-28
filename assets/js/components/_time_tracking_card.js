@@ -4,6 +4,7 @@ import StudyIcon from "../../images/icon-study.svg";
 import ExerciseIcon from "../../images/icon-exercise.svg";
 import SocialIcon from "../../images/icon-social.svg";
 import SelfCareIcon from "../../images/icon-self-care.svg";
+import { defaultTimeFrame } from "./_time_frame_item";
 
 export class TimeTrackingComponent {
   constructor(data) {
@@ -98,7 +99,7 @@ export default class TimeTrackingCard extends HTMLElement {
     super();
     this.title = "";
     this.timeframes = {};
-    this.activeTimeframe = "weekly";
+    this.activeTimeframe = defaultTimeFrame.value;
     this.stylesText = "";
   }
 
@@ -106,6 +107,7 @@ export default class TimeTrackingCard extends HTMLElement {
     this.render();
     this.handleCardContentFocus();
     this.handleEllipsisIconFocus();
+    this.handleTimeframeChange();
   }
 
   render() {
@@ -163,23 +165,25 @@ export default class TimeTrackingCard extends HTMLElement {
               fill-rule="evenodd"
             />
           </svg>
-          <h2 class="card__current-time">${this.getCurrentTime()}hrs</h2>
-          <p class="card__previous-time">${this.getPreviousTime()}hrs</p>
+          <h2 class="card__current-time">${this.getCurrentTime()}</h2>
+          <p class="card__previous-time">${this.getPreviousTime()}</p>
         </section>
       </div>`;
   }
 
   getCurrentTime() {
-    return this.timeframes[this.activeTimeframe].current;
+    return `${this.timeframes[this.activeTimeframe].current}hrs`;
   }
 
   getPreviousTime() {
     if (this.activeTimeframe === "daily") {
-      return `Yesterday - ${this.timeframes[this.activeTimeframe].previous}`;
+      return `Yesterday - ${this.timeframes[this.activeTimeframe].previous}hrs`;
     } else if (this.activeTimeframe === "weekly") {
-      return `Last Week - ${this.timeframes[this.activeTimeframe].previous}`;
+      return `Last Week - ${this.timeframes[this.activeTimeframe].previous}hrs`;
     } else if (this.activeTimeframe === "monthly") {
-      return `Last Month - ${this.timeframes[this.activeTimeframe].previous}`;
+      return `Last Month - ${
+        this.timeframes[this.activeTimeframe].previous
+      }hrs`;
     }
   }
 
@@ -251,10 +255,12 @@ export default class TimeTrackingCard extends HTMLElement {
           align-items: center;
           padding: 28px 24px;
           cursor: pointer;
+          transition: background-color 0.1s ease-in-out;
         }
 
         .card__content.active {
           background-color: #33397a;
+          transition: background-color 0.1s ease-in-out;
         }
 
         .card__content .card__title {
@@ -267,7 +273,7 @@ export default class TimeTrackingCard extends HTMLElement {
           justify-self: end;
         }
         .card__icon path {
-          fill: var(--desaturated-blue);
+          fill: var(--pale-blue);
         }
         .card__icon.active path {
           fill: var(--white);
@@ -281,7 +287,7 @@ export default class TimeTrackingCard extends HTMLElement {
           grid-area: previous-time;
           justify-self: end;
           font-size: 15px;
-          color: var(--desaturated-blue);
+          color: var(--pale-blue);
         }
         .card.card-work .card__img-wrapper {
           background-color: var(--light-red-work);
@@ -326,15 +332,15 @@ export default class TimeTrackingCard extends HTMLElement {
     });
   }
 
-  disconnectedCallback() {
-    console.log("TimeTrackingCard element removed from page.");
-  }
-
-  adoptedCallback() {
-    console.log("TimeTrackingCard element moved to new page.");
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log("TimeTrackingCard element attributes changed.");
+  handleTimeframeChange() {
+    document.addEventListener("timeframeChange", (e) => {
+      this.activeTimeframe = e.detail;
+      const currentTime = this.shadowRoot.querySelector(".card__current-time");
+      const previousTime = this.shadowRoot.querySelector(
+        ".card__previous-time"
+      );
+      currentTime.textContent = this.getCurrentTime();
+      previousTime.textContent = this.getPreviousTime();
+    });
   }
 }

@@ -22,16 +22,4 @@ export default class TimeTrackingCardList extends HTMLElement {
         .join("")}
     `;
   }
-
-  disconnectedCallback() {
-    console.log("TimeTrackingCardList element removed from page.");
-  }
-
-  adoptedCallback() {
-    console.log("TimeTrackingCardList element moved to new page.");
-  }
-
-  attributeChangedCallback(name, oldValue, newValue) {
-    console.log("TimeTrackingCardList element attributes changed.");
-  }
 }
