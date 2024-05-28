@@ -148,7 +148,7 @@ export default class TimeTrackingCard extends HTMLElement {
           />
         </div>
         <section class="card__content">
-          <p class="card__title">${this.title}</p>
+          <h2 class="card__title">${this.title}</h2>
           <svg
             width="21"
             height="5"
@@ -165,7 +165,7 @@ export default class TimeTrackingCard extends HTMLElement {
               fill-rule="evenodd"
             />
           </svg>
-          <h2 class="card__current-time">${this.getCurrentTime()}</h2>
+          <p class="card__current-time">${this.getCurrentTime()}</p>
           <p class="card__previous-time">${this.getPreviousTime()}</p>
         </section>
       </div>`;
