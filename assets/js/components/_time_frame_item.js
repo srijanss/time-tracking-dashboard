@@ -11,7 +11,6 @@ export default class TimeFrameItem extends HTMLElement {
   }
 
   connectedCallback() {
-    console.log("TimeFrameItem connected to page.");
     this.render();
     this.handleTimeframeChange();
   }
