@@ -5,6 +5,7 @@ import ExerciseIcon from "../../images/icon-exercise.svg";
 import SocialIcon from "../../images/icon-social.svg";
 import SelfCareIcon from "../../images/icon-self-care.svg";
 import { defaultTimeFrame } from "./_time_frame_item";
+import css from "./_time_tracking_card.css?inline";
 
 export class TimeTrackingComponent {
   constructor(data) {
@@ -135,7 +136,7 @@ export default class TimeTrackingCard extends HTMLElement {
 
     shadow.innerHTML = `
       <style>
-        ${this.getStyleContent()}
+        ${css}
       </style>
       <div class="card card-${this.theme}">
         <div class="card__img-wrapper">
@@ -185,129 +186,6 @@ export default class TimeTrackingCard extends HTMLElement {
         this.timeframes[this.activeTimeframe].previous
       }hrs`;
     }
-  }
-
-  getStyleContent() {
-    return `
-      host,
-        :host *,*::before,*::after {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        }
-        :host {
-          display: block;
-        }
-        .card {
-          position: relative;
-          width: 327px;
-          height: 160px;
-          margin: 0 auto;
-        }
-        .card__img-wrapper {
-          width: 100%;
-          position: absolute;
-          top: 0;
-          left: 0;
-          display: flex;
-          justify-content: end;
-          background-color: var(--light-red-work);
-          border-top-right-radius: 15px;
-          border-top-left-radius: 15px;
-          padding-right: 15px;
-          z-index: 0;
-        }
-        .card__img-wrapper .card__img {
-          object-fit: cover;
-        }
-        .card__img-wrapper .card__img-work {
-          object-position: 0 -11px;
-        }
-        .card__img-wrapper .card__img-play {
-          object-position: 0 -5px;
-        }
-        .card__img-wrapper .card__img-study {
-          object-position: 0 -7px;
-        }
-        .card__img-wrapper .card__img-exercise {
-          object-position: center center;
-        }
-        .card__img-wrapper .card__img-social {
-          object-position: 0 -14px;
-        }
-        .card__img-wrapper .card__img-self-care {
-          object-position: 0 -12px;
-        }
-        .card .card__content {
-          position: absolute;
-          left: 0;
-          bottom: 0;
-          z-index: 1;
-          width: 100%;
-          height: 122px;
-          background-color: var(--dark-blue);
-          border-radius: 15px;
-          display: grid;
-          grid-template-areas:
-            "title icon"
-            "current-time previous-time";
-          gap: 7px;
-          align-items: center;
-          padding: 28px 24px;
-          cursor: pointer;
-          transition: background-color 0.1s ease-in-out;
-        }
-
-        .card__content.active {
-          background-color: #33397a;
-          transition: background-color 0.1s ease-in-out;
-        }
-
-        .card__content .card__title {
-          grid-area: title;
-          font-size: 18px;
-          font-weight: var(--fw-medium);
-        }
-        .card__content .card__icon {
-          grid-area: icon;
-          justify-self: end;
-        }
-        .card__icon path {
-          fill: var(--pale-blue);
-        }
-        .card__icon.active path {
-          fill: var(--white);
-        }
-        .card__content .card__current-time {
-          grid-area: current-time;
-          font-size: 32px;
-          font-weight: var(--fw-light);
-        }
-        .card__content .card__previous-time {
-          grid-area: previous-time;
-          justify-self: end;
-          font-size: 15px;
-          color: var(--pale-blue);
-        }
-        .card.card-work .card__img-wrapper {
-          background-color: var(--light-red-work);
-        }
-        .card.card-play .card__img-wrapper {
-          background-color: var(--soft-blue-play);
-        }
-        .card.card-study .card__img-wrapper {
-          background-color: var(--light-red-study);
-        }
-        .card.card-exercise .card__img-wrapper {
-          background-color: var(--lime-green-exercise);
-        }
-        .card.card-social .card__img-wrapper {
-          background-color: var(--violet-social);
-        }
-        .card.card-self-care .card__img-wrapper {
-          background-color: var(--soft-orange-self-care);
-        }
-    `;
   }
 
   handleCardContentFocus() {

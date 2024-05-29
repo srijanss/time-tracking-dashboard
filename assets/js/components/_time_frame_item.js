@@ -1,3 +1,5 @@
+import css from "./_time_frame_item.css?inline";
+
 export const defaultTimeFrame = {
   index: 1,
   value: "weekly",
@@ -20,41 +22,7 @@ export default class TimeFrameItem extends HTMLElement {
     const shadow = this.attachShadow({ mode: "open" });
     shadow.innerHTML = `
       <style>
-        :host, *, *::before, *::after {
-          box-sizing: border-box;
-          margin: 0;
-          padding: 0;
-        } 
-        :host {
-          display: block;
-        }
-        fieldset {
-          border: none;
-          padding: 0;
-        }
-        ul {
-          list-style: none;
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          justify-items: center;
-          padding: 24px;
-        }
-        .hidden {
-          display: none;
-        }
-        input[type='radio'] {
-          display: none;
-        }
-        label {
-          cursor: pointer;
-          text-transform: capitalize;
-          color: var(--desaturated-blue);
-        }
-        input[type='radio']:checked ~ label,
-        label:hover,
-        label:focus {
-          color: var(--white);
-        }
+        ${css} 
       </style>
       <fieldset>
         <legend class="hidden">Select a timeframe:</legend>

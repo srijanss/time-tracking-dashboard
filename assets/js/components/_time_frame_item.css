@@ -1,0 +1,39 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:host {
+  display: block;
+}
+fieldset {
+  border: none;
+  padding: 0;
+}
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  padding: 24px;
+}
+.hidden {
+  display: none;
+}
+input[type="radio"] {
+  display: none;
+}
+label {
+  cursor: pointer;
+  text-transform: capitalize;
+  color: var(--desaturated-blue);
+  &:hover,
+  &:focus {
+    color: var(--white);
+  }
+}
+input[type="radio"]:checked ~ label {
+  color: var(--white);
+}
