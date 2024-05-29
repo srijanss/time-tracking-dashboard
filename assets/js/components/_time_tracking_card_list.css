@@ -1,10 +1,15 @@
+@import "../../css/_mixins.css";
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 :host {
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 24px;
+
+  @mixin media-query-desktop {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
 }

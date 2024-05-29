@@ -45,13 +45,24 @@ img {
 main {
   width: 100%;
   padding-top: 81px;
+  @mixin media-query-desktop {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .container {
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  display: grid;
   gap: 24px;
+
+  @mixin media-query-desktop {
+    width: 1110px;
+    margin: 0 auto;
+    grid-template-columns: auto 1fr;
+    gap: 30px;
+  }
 }
 
 .card {
@@ -83,6 +94,32 @@ main {
         font-size: 24px;
         font-weight: var(--fw-light);
         line-height: 1.5;
+      }
+    }
+  }
+
+  @mixin media-query-desktop {
+    width: 255px;
+
+    & figure {
+      flex-direction: column;
+      align-items: start;
+      padding: 34px 32px 70px;
+
+      & img {
+        width: 78px;
+        height: 78px;
+      }
+
+      & figcaption {
+        margin-top: 20px;
+        p {
+          line-height: 1.5;
+        }
+        h1 {
+          font-size: 40px;
+          line-height: 1.3;
+        }
       }
     }
   }

@@ -1,3 +1,5 @@
+@import "../../css/_mixins.css";
+
 *,
 *::before,
 *::after {
@@ -18,6 +20,15 @@ ul {
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   padding: 24px;
+
+  @mixin media-query-desktop {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    justify-items: start;
+    gap: 20px;
+    padding: 0 32px;
+    padding-top: 26px;
+  }
 }
 .hidden {
   display: none;
